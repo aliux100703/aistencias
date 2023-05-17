@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CRUD</title>
+    <title>ASISTENCIAS</title>
 </head>
 <body>
-    <h1>CRUD</h1>
+    <h1>Asiatencias</h1>
 
     <h2>Crear registro:</h2>
     <form action="crear.php" method="POST">
