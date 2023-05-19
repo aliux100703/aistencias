@@ -52,7 +52,8 @@
             }
         }else{
             // no existe el usuario
-            echo "Nombre de usuario o contraseña incorrecto";
+            echo '<script language="javascript">alert("Usuario o contraseña invalido");</script>';
+
         }
         
 
@@ -62,7 +63,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V3</title>
+	<title>Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">	
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
@@ -84,7 +85,7 @@
 			<div class="wrap-login100">
 				<form class="login100-form validate-form" action="#" method="POST">
 					<span class="login100-form-logo">
-					<img src="ima/b-bechapra-09-1024x973.png" width="105" height="105" />
+					<img src="ima/Logo BTC 1 (1).png" width="125" height="85" />
 					</span>
 
 					<span class="login100-form-title p-b-34 p-t-27">
