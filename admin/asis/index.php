@@ -2,70 +2,76 @@
 <html>
 <head>
     <title>ASISTENCIAS</title>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+
 </head>
 <body>
+	<div class="container">
     <h1>Asiatencias</h1>
 
-    <h2>Crear registro:</h2>
-    <form action="crear.php" method="POST">
-        <label for="nombre">Nombre:</label>
-        <input type="text" name="nombre" required><br>
-        <label for="abandono">Abandono:</label>
-        <input type="number" name="abandono" required><br>
-        <label for="enfermo">Enfermo:</label>
-        <input type="number" name="enfermo" required><br>
-        <label for="falta">Falta:</label>
-        <input type="number" name="falta" required><br>
-        <label for="no_registro">No registro:</label>
-        <input type="number" name="no_registro" required><br>
-        <label for="retraso">Retraso:</label>
-        <input type="number" name="retraso" required><br>
-        <label for="permiso">Permiso:</label>
-        <input type="number" name="permiso" required><br>
-        <input type="submit" value="Crear">
-        
-    </form>
 
+	<form action="importar.php" method="post" encriype="multipart/form-data">
+	<input  name="archivo" type="file" required>
+<input class="btn btn-primary" type="submit" value="importar">
+
+	</form>
     <h2>Listar registros:</h2>
-    <form action="importar.php" method="POST" enctype="multipart/form-data">
-        <input type="file" name="archivo" required>
-        <input type="submit" value="Importar">
-    </form>
-    <?php
-        // Conectar a la base de datos utilizando PDO
-        $dsn = 'mysql:host=localhost;dbname=asistencias';
-        $usuario = 'root';
-        $contraseña = '';
+    <table class="table table-bordered table-striped" style="margin-top:20px;">
+				<thead>
+					<th>ID</th>
+					<th>Nombre Empleado</th>
+					<th>Abandono</th>
+					<th>Enfermo</th>
+					<th>Falto</th>
+					<th>No Registro</th>
+					<th>Permiso</th>
+					<th>Retardo</th>
+				
+				</thead>
+				<tbody>
+					<?php
+						// incluye la conexión
+						include_once('conexion.php');
 
-        try {
-            $conexion = new PDO($dsn, $usuario, $contraseña);
-            $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+						$database = new Conexion();
+    					$db = $database->open();
+						try{	
+						    $sql = 'SELECT * FROM empleado';
+						    foreach ($db->query($sql) as $row) {
+						    	?>
+						    	<tr>
+						    		<td><?php echo $row['id']; ?></td>
+						    		<td><?php echo $row['empleado_id']; ?></td>
+						    		<td><?php echo $row['abandono']; ?></td>
+						    		<td><?php echo $row['enfermo']; ?></td>
+									<td><?php echo $row['falto']; ?></td>
+									<td><?php echo $row['no_r']; ?></td>
+									<td><?php echo $row['permiso']; ?></td>
+									<td><?php echo $row['retardo']; ?></td>
+									
+						    		<td>
+						    			<a href="#edit_<?php echo $row['id']; ?>" class="btn btn-success btn-sm" data-toggle="modal"><span class="fa fa-edit"></span> Editar</a>
+						    			
+						    		</td>
+						    		<?php include('edit_delete_modal.php'); ?>
+						    	</tr>
+						    	<?php 
+						    }
+						}
+						catch(PDOException $e){
+							echo "There is some problem in connection: " . $e->getMessage();
+						}
 
-            // Realizar la consulta
-            $consulta = "SELECT * FROM asistencia";
-            $resultado = $conexion->query($consulta);
+						//cerrar conexión
+						$database->close();
 
-            // Mostrar los registros en una tabla
-            echo "<table>";
-            echo "<tr><th>Nombre</th><th>Abandono</th><th>Enfermo</th><th>Falta</th><th>No Registro</th><th>Retraso</th><th>Permiso</th></tr>";
-            while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
-                echo "<tr>";
-                echo "<td>" . $fila['nombre'] . "</td>";
-                echo "<td>" . $fila['abandono'] . "</td>";
-                echo "<td>" . $fila['enfermo'] . "</td>";
-                echo "<td>" . $fila['falta'] . "</td>";
-                echo "<td>" . $fila['no_registro'] . "</td>";
-                echo "<td>" . $fila['retraso'] . "</td>";
-                echo "<td>" . $fila['permiso'] . "</td>";
-                echo "</tr>";
-            }
-            echo "</table>";
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-
-        // Cerrar la conexión a la base de datos
-        $conexion = null;
-    ?>
+					?>
+				</tbody>
+			</table>
+	</div>
 </body>
 </html>
