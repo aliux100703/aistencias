@@ -32,11 +32,23 @@ if (isset($_POST['crear'])) {
 
     // Ejecutar la consulta
     if (mysqli_query($conexion, $sql)) {
-        // Registro creado exitosamente
-        header("Location: index.php");
-        exit();
+        // Obtener el ID del registro recién creado
+        $idEmpleado = mysqli_insert_id($conexion);
+
+        // Preparar la consulta SQL para insertar el ID en la tabla asistencias
+        $sqlAsistencias = "INSERT INTO asistencias (nombre_id) VALUES ($idEmpleado)";
+
+        // Ejecutar la consulta de asistencias
+        if (mysqli_query($conexion, $sqlAsistencias)) {
+            // Registro y relación creados exitosamente
+            header("Location: index.php");
+            exit();
+        } else {
+            // Error al crear la relación en asistencias
+            echo "Error: " . $sqlAsistencias . "<br>" . mysqli_error($conexion);
+        }
     } else {
-        // Error al crear el registro
+        // Error al crear el registro de empleado
         echo "Error: " . $sql . "<br>" . mysqli_error($conexion);
     }
 
