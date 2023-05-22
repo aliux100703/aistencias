@@ -1,4 +1,17 @@
-<!DOCTYPE html>
+<?php
+
+session_start();
+
+if (!isset($_SESSION['rol'])) {
+    header('location: ../../login/login.php');
+} else {
+    if ($_SESSION['rol'] != 1) {
+        header('location: .././login/login.php');
+    }
+}
+
+
+?><!DOCTYPE html>
 <html>
 
 <head>
@@ -11,133 +24,180 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
 </head>
 
 <body>
-    <div class="container">
-        <h1>Asiatencias</h1>
+
+    <div class="container-fluid">
+        <div class="row justify-content-center align-content-center">
+            <div class="col-8 barra">
+                <img src="imag/becha.png" width="250" height="79" />
+            </div>
+            <div class="col-4 text-right barra">
+                <ul class="navbar-nav mr-auto">
+                    <li>
+                        <a href="#" class="px-3 text-light perfil dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-circle user"></i></a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbar-dropdown">
+                        <a href="../../login/login.php?cerrar_sesion=1" class="bot1">Cerrar sesión</a>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="barra-lateral col-12 col-sm-auto">
+                <nav class="menu d-flex d-sm-block justify-content-center flex-wrap">
+                    <a href="asis/index.php">
+                        <center><span>Asistencias</span></center>
+                    </a>
+                    <a href="../user/index.php">
+                        <center><span>Empleados</span></center>
+                    </a>
+                    <a href="#">
+                        <center><span>Usuarios</span></center>
+                    </a>
+                </nav>
+            </div>
+            <main class="main col">
+                <div class="row justify-content-center align-content-center text-center">
+                    <div class="container">
+
+                        <h1>Asiatencias</h1>
 
 
-        <form action="importar.php" method="post" encriype="multipart/form-data">
-            <input name="archivo" type="file" required>
-            <input class="btn btn-primary" type="submit" value="importar">
+                        <form action="importar.php" method="post" encriype="multipart/form-data">
+                            <input name="archivo" type="file" required>
+                            <input class="btn btn-primary" type="submit" value="importar">
 
-        </form>
-        <h2>Listar registros:</h2>
-        <table class="table table-bordered table-striped" style="margin-top:20px;">
-            <thead>
-                <th>ID</th>
-                <th>Nombre Empleado</th>
-                <th>Apellido</th>
-                <th>Abandono</th>
-                <th>Enfermo</th>
-                <th>Falto</th>
-                <th>No Registro</th>
-                <th>Permiso</th>
-                <th>Retardo</th>
-
-            </thead>
-            <tbody>
-                <?php
-                // Establecer la conexión a la base de datos (reemplaza los valores con los tuyos)
-                $servername = "localhost";
-                $username = "root";
-                $password = "";
-                $dbname = "asistencias";
-
-                $conn = new mysqli($servername, $username, $password, $dbname);
-
-                // Verificar si la conexión fue exitosa
-                if ($conn->connect_error) {
-                    die("Error de conexión: " . $conn->connect_error);
-                }
-
-                // Realizar el LEFT JOIN entre las tablas "empleado" y "asistencias"
-                $sql = "SELECT empleado.id, empleado.nombre, empleado.apellidos, asistencias.abandono, asistencias.enfermo, asistencias.falto, asistencias.no_r, asistencias.permiso, asistencias.retardo
-                        FROM empleado
-                        LEFT JOIN asistencias ON empleado.id = asistencias.nombre_id";
-
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . $row["id"] . "</td>";
-                        echo "<td>" . $row["nombre"] . "</td>";
-                        echo "<td>" . $row["apellidos"] . "</td>";
-                        echo "<td>" . $row["abandono"] . "</td>";
-                        echo "<td>" . $row["enfermo"] . "</td>";
-                        echo "<td>" . $row["falto"] . "</td>";
-                        echo "<td>" . $row["no_r"] . "</td>";
-                        echo "<td>" . $row["permiso"] . "</td>";
-                        echo "<td>" . $row["retardo"] . "</td>";
-                        echo "<td><button type='button' class='btn btn-primary btn-edit' data-id='" . $row["id"] . "' data-nombre='" . $row["nombre"] . "' data-apellidos='" . $row["apellidos"] . "' data-abandono='" . $row["abandono"] . "' data-enfermo='" . $row["enfermo"] . "' data-falto='" . $row["falto"] . "' data-no_r='" . $row["no_r"] . "' data-permiso='" . $row["permiso"] . "' data-retardo='" . $row["retardo"] . "'>Editar</button></td>";
-                        echo "</tr>";
-                    }
-
-                    echo "</table>";
-                } else {
-                    echo "No se encontraron registros.";
-                }
-
-                // Cerrar la conexión
-                $conn->close();
-
-                ?>
-            </tbody>
-        </table>
-        <!-- Modal de edición -->
-        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalEditarEmpleadoLabel">Editar Empleado</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- Formulario de edición de empleado -->
-                        <!-- Formulario de edición de empleado -->
-                        <form id="formEditarEmpleado" action="editar_empleado.php" method="POST">
-                            <input type="hidden" id="idEmpleado" name="idEmpleado">
-                            <div class="form-group">
-                                <label for="nombre">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="apellidos">Apellidos</label>
-                                <input type="text" class="form-control" id="apellidos" name="apellidos" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="abandono">Abandono</label>
-                                <input type="text" class="form-control" id="abandono" name="abandono">
-                            </div>
-                            <div class="form-group">
-                                <label for="enfermo">Enfermo</label>
-                                <input type="text" class="form-control" id="enfermo" name="enfermo">
-                            </div>
-                            <div class="form-group">
-                                <label for="falto">Falto</label>
-                                <input type="text" class="form-control" id="falto" name="falto">
-                            </div>
-                            <div class="form-group">
-                                <label for="no_r">No Registro</label>
-                                <input type="text" class="form-control" id="no_r" name="no_r">
-                            </div>
-                            <div class="form-group">
-                                <label for="permiso">Permiso</label>
-                                <input type="text" class="form-control" id="permiso" name="permiso">
-                            </div>
-                            <div class="form-group">
-                                <label for="retardo">Retardo</label>
-                                <input type="text" class="form-control" id="retardo" name="retardo">
-                            </div>
-                            <button type="submit" class="btn btn-primary" id="btnGuardar">Guardar</button>
                         </form>
+                        <h2>Listar registros:</h2>
+                        <table class="table table-bordered table-striped" style="margin-top:20px;">
+                            <thead>
+                                <th>ID</th>
+                                <th>Nombre Empleado</th>
+                                <th>Apellido</th>
+                                <th>Abandono</th>
+                                <th>Enfermo</th>
+                                <th>Falto</th>
+                                <th>No Registro</th>
+                                <th>Permiso</th>
+                                <th>Retardo</th>
+
+                            </thead>
+                            <tbody>
+                                <?php
+                                // Establecer la conexión a la base de datos (reemplaza los valores con los tuyos)
+                                $servername = "localhost";
+                                $username = "root";
+                                $password = "";
+                                $dbname = "asistencias";
+
+                                $conn = new mysqli($servername, $username, $password, $dbname);
+
+                                // Verificar si la conexión fue exitosa
+                                if ($conn->connect_error) {
+                                    die("Error de conexión: " . $conn->connect_error);
+                                }
+
+                                // Realizar el LEFT JOIN entre las tablas "empleado" y "asistencias"
+                                $sql = "SELECT empleado.id, empleado.nombre, empleado.apellidos, asistencias.abandono, asistencias.enfermo, asistencias.falto, asistencias.no_r, asistencias.permiso, asistencias.retardo
+                                    FROM empleado
+                                    LEFT JOIN asistencias ON empleado.id = asistencias.nombre_id";
+
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo "<tr>";
+                                        echo "<td>" . $row["id"] . "</td>";
+                                        echo "<td>" . $row["nombre"] . "</td>";
+                                        echo "<td>" . $row["apellidos"] . "</td>";
+                                        echo "<td>" . $row["abandono"] . "</td>";
+                                        echo "<td>" . $row["enfermo"] . "</td>";
+                                        echo "<td>" . $row["falto"] . "</td>";
+                                        echo "<td>" . $row["no_r"] . "</td>";
+                                        echo "<td>" . $row["permiso"] . "</td>";
+                                        echo "<td>" . $row["retardo"] . "</td>";
+                                        echo "<td><button type='button' class='btn btn-primary btn-edit' data-id='" . $row["id"] . "' data-nombre='" . $row["nombre"] . "' data-apellidos='" . $row["apellidos"] . "' data-abandono='" . $row["abandono"] . "' data-enfermo='" . $row["enfermo"] . "' data-falto='" . $row["falto"] . "' data-no_r='" . $row["no_r"] . "' data-permiso='" . $row["permiso"] . "' data-retardo='" . $row["retardo"] . "'>Editar</button></td>";
+                                        echo "</tr>";
+                                    }
+
+                                    echo "</table>";
+                                } else {
+                                    echo "No se encontraron registros.";
+                                }
+
+                                // Cerrar la conexión
+                                $conn->close();
+
+                                ?>
+                            </tbody>
+                        </table>
+                        <!-- Modal de edición -->
+                        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalEditarEmpleadoLabel">Editar Empleado</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Formulario de edición de empleado -->
+                                        <!-- Formulario de edición de empleado -->
+                                        <form id="formEditarEmpleado" action="editar_empleado.php" method="POST">
+                                            <input type="hidden" id="idEmpleado" name="idEmpleado">
+                                            <div class="form-group">
+                                                <label for="nombre">Nombre</label>
+                                                <input type="text" class="form-control" id="nombre" name="nombre" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="apellidos">Apellidos</label>
+                                                <input type="text" class="form-control" id="apellidos" name="apellidos" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="abandono">Abandono</label>
+                                                <input type="text" class="form-control" id="abandono" name="abandono">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="enfermo">Enfermo</label>
+                                                <input type="text" class="form-control" id="enfermo" name="enfermo">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="falto">Falto</label>
+                                                <input type="text" class="form-control" id="falto" name="falto">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="no_r">No Registro</label>
+                                                <input type="text" class="form-control" id="no_r" name="no_r">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="permiso">Permiso</label>
+                                                <input type="text" class="form-control" id="permiso" name="permiso">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="retardo">Retardo</label>
+                                                <input type="text" class="form-control" id="retardo" name="retardo">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary" id="btnGuardar">Guardar</button>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
-            </div>
+
+            </main>
         </div>
     </div>
 
@@ -206,6 +266,10 @@
             });
         });
     </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/646c794df3.js"></script>
 </body>
 
 </html>
