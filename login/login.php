@@ -13,7 +13,7 @@
     if(isset($_SESSION['rol'])){
         switch($_SESSION['rol']){
             case 1:
-                header('location: ../user/index.php');
+                header('location: ../admin/user/index.php');
             break;
 
             case 2:
@@ -41,7 +41,7 @@
             $_SESSION['rol'] = $rol;
             switch($rol){
                 case 1:
-                    header('location: ../user/index.php');
+                    header('location: ../admin/user/index.php');
                 break;
 
                 case 2:
