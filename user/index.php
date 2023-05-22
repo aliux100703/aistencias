@@ -25,12 +25,14 @@
 
 <!-- Bootstrap JS -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+<link rel="stylesheet" type="text/css" href="css/use.css">
+<link rel="stylesheet" href="https://unpkg.com/transition-style">
 </head>
 <body>
+   <h1>Administrador</h1>
     <!-- Botón para mostrar el modal de creación -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearModal">Crear Empleado</button>
-    <a href="../login/login.php?cerrar_sesion=1" class="btn btn-danger">Cerrar sesión</a>
+    <button type="button" class="bot" data-toggle="modal" data-target="#crearModal">Crear Empleado</button>
+    <a href="../login/login.php?cerrar_sesion=1" class="bot1">Cerrar sesión</a>
 	
 
     <!-- Modal de Creación -->
@@ -124,7 +126,7 @@
 
     <!-- Tabla de Empleados -->
 	<div class="form-group">
-    <label for="buscar">Buscar:</label>
+    <label for="buscar"><h3>Buscar:</h3></label>
     <input type="text" class="form-control" id="buscarInput" onkeyup="buscarEmpleados()" placeholder="Ingresa el nombre o apellido">
    </div>
     <table class="table">
@@ -176,9 +178,9 @@
                 // Agrega las demás celdas de la fila aquí
                 echo "<td>";
                 echo "<!-- Botón para mostrar el modal de edición -->";
-                echo "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#editarModal_" . $row['id'] . "'>Editar</button>";
+                echo "<button type='button' class='bot2' data-toggle='modal' data-target='#editarModal_" . $row['id'] . "'>Editar</button>";
                 echo "<!-- Botón para mostrar el modal de eliminación -->";
-                echo "<button type='button' class='btn btn-danger' data-toggle='modal' data-target='#eliminarModal_" . $row['id'] . "'>Eliminar</button>";
+                echo "<button type='button' class='bot3' data-toggle='modal' data-target='#eliminarModal_" . $row['id'] . "'>Eliminar</button>";
                 echo "</td>";
                 echo "</tr>";
 
@@ -303,7 +305,6 @@
         ?>
     </tbody>
 </table>
-
 <!-- Agrega aquí los enlaces a las bibliotecas JavaScript -->
 <script>
 function buscarEmpleados() {
