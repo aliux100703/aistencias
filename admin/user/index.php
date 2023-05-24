@@ -3,10 +3,10 @@
 session_start();
 
 if (!isset($_SESSION['rol'])) {
-    header('location: ../login/login.php');
+    header('location: ../../login/login.php');
 } else {
     if ($_SESSION['rol'] != 1) {
-        header('location: ../login/login.php');
+        header('location: .././login/login.php');
     }
 }
 
@@ -49,7 +49,7 @@ if (!isset($_SESSION['rol'])) {
                         <a href="#" class="px-3 text-light perfil dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-circle user"></i></a>
 
                         <div class="dropdown-menu" aria-labelledby="navbar-dropdown">
-                            <a href="../login/login.php?cerrar_sesion=1" class="bot1">Cerrar sesión</a>
+                            <a href="../../login/login.php?cerrar_sesion=1" class="bot1">Cerrar sesión</a>
                             </a>
                         </div>
                     </li>
