@@ -21,6 +21,7 @@ if (!isset($_SESSION['rol'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -54,13 +55,13 @@ if (!isset($_SESSION['rol'])) {
         <div class="row">
             <div class="barra-lateral col-12 col-sm-auto">
                 <nav class="menu d-flex d-sm-block justify-content-center flex-wrap">
-                    <a href="asis/index.php">
+                    <a href="../asis/index.php">
                         <center><span>Asistencias</span></center>
                     </a>
                     <a href="../user/index.php">
                         <center><span>Empleados</span></center>
                     </a>
-                    <a href="#">
+                    <a href="../usuar/index.php">
                         <center><span>Usuarios</span></center>
                     </a>
                 </nav>
@@ -69,7 +70,7 @@ if (!isset($_SESSION['rol'])) {
                 <div class="row justify-content-center align-content-center text-center">
                     <div class="container">
 
-                        <h1>Asiatencias</h1>
+                        <h1>Asistencias</h1>
 
 
                         <form action="importar.php" method="post" encriype="multipart/form-data">

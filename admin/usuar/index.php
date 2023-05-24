@@ -39,13 +39,13 @@
         <div class="row">
             <div class="barra-lateral col-12 col-sm-auto">
                 <nav class="menu d-flex d-sm-block justify-content-center flex-wrap">
-                    <a href="#">
+                <a href="../asis/index.php">
                         <center><span>Asistencias</span></center>
                     </a>
-                    <a href="#">
+                    <a href="../user/index.php">
                         <center><span>Empleados</span></center>
                     </a>
-                    <a href="#">
+                    <a href="../usuar/index.php">
                         <center><span>Usuarios</span></center>
                     </a>
                 </nav>
