@@ -21,7 +21,7 @@ if (!isset($_SESSION['rol'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/use.css">
+    
     <link rel="stylesheet" href="https://unpkg.com/transition-style">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
@@ -160,38 +160,20 @@ if (!isset($_SESSION['rol'])) {
                                         echo "<label for='apellidos'>Apellidos</label>";
                                         echo "<input type='text' class='form-control' name='apellidos' value='" . $row['apellidos'] . "'>";
                                         echo "</div>";
-                                        echo "<div class='form-group'>";
-                                        echo "<label for='curp'>Curp</label>";
-                                        echo "<input type='text' class='form-control' name='curp' value='" . $row['curp'] . "'>";
-                                        echo "</div>";
-                                        echo "<div class='form-group'>";
-                                        echo "<label for='act_naci'>Acta de nacimiento</label>";
-                                        echo "<input type='text' class='form-control' name='act_naci' value='" . $row['act_naci'] . "'>";
-                                        echo "</div>";
-                                        echo "<div class='form-group'>";
-                                        echo "<label for='ccb'>CCB</label>";
-                                        echo "<input type='text' class='form-control' name='ccb' value='" . $row['ccb'] . "'>";
-                                        echo "</div>";
+                                       
+                                        
+                                       
                                         echo "<div class='form-group'>";
                                         echo "<label for='correo'>Correo</label>";
                                         echo "<input type='text' class='form-control' name='correo' value='" . $row['correo'] . "'>";
                                         echo "</div>";
-                                        echo "<div class='form-group'>";
-                                        echo "<label for='rfc'>RFC</label>";
-                                        echo "<input type='text' class='form-control' name='rfc' value='" . $row['rfc'] . "'>";
-                                        echo "</div>";
+                                        
                                         echo "<div class='form-group'>";
                                         echo "<label for='ubicacion'>Ubicacion</label>";
                                         echo "<input type='text' class='form-control' name='ubicacion' value='" . $row['ubicacion'] . "'>";
                                         echo "</div>";
-                                        echo "<div class='form-group'>";
-                                        echo "<label for='ine'>INE</label>";
-                                        echo "<input type='text' class='form-control' name='ine' value='" . $row['ine'] . "'>";
-                                        echo "</div>";
-                                        echo "<div class='form-group'>";
-                                        echo "<label for='nss'>NSS</label>";
-                                        echo "<input type='text' class='form-control' name='nss' value='" . $row['nss'] . "'>";
-                                        echo "</div>";
+                                        
+                                      
                                         echo "<div class='form-group'>";
                                         echo "<label for='telefono'>TELEFONO</label>";
                                         echo "<input type='text' class='form-control' name='telefono' value='" . $row['telefono'] . "'>";
@@ -216,10 +198,7 @@ if (!isset($_SESSION['rol'])) {
                                         echo "<label for='sueldo'>Sueldo</label>";
                                         echo "<input type='text' class='form-control' name='sueldo' value='" . $row['sueldo'] . "'>";
                                         echo "</div>";
-                                        echo "<div class='form-group'>";
-                                        echo "<label for='FOTO'>FOTO</label>";
-                                        echo "<input type='text' class='form-control' name='foto' value='" . $row['foto'] . "'>";
-                                        echo "</div>";
+                                        
 
 
 
@@ -280,38 +259,19 @@ if (!isset($_SESSION['rol'])) {
                                                     <label for="apellidos">Apellidos</label>
                                                     <input type="text" class="form-control" name="apellidos">
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="curp">Curp</label>
-                                                    <input type="text" class="form-control" name="curp">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="act_naci">Acta de nacimiento</label>
-                                                    <input type="text" class="form-control" name="act_naci">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="ccb">CCB</label>
-                                                    <input type="text" class="form-control" name="ccb">
-                                                </div>
+
+                                           
                                                 <div class="form-group">
                                                     <label for="correo">Correo</label>
                                                     <input type="text" class="form-control" name="correo">
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="rfc">RFC</label>
-                                                    <input type="text" class="form-control" name="rfc">
-                                                </div>
+                                             
                                                 <div class="form-group">
                                                     <label for="ubicacion">Ubicacion</label>
                                                     <input type="text" class="form-control" name="ubicacion">
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="ine">Ine</label>
-                                                    <input type="text" class="form-control" name="ine">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="nss">NSS</label>
-                                                    <input type="text" class="form-control" name="nss">
-                                                </div>
+                                             
+                                           
                                                 <div class="form-group">
                                                     <label for="telefono">Telefono</label>
                                                     <input type="text" class="form-control" name="telefono">
@@ -332,10 +292,7 @@ if (!isset($_SESSION['rol'])) {
                                                     <label for="fecha_alta">Fecha alta</label>
                                                     <input type="text" class="form-control" name="fecha_alta">
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="foto">Foto</label>
-                                                    <input type="text" class="form-control" name="foto">
-                                                </div>
+                                     
                                                 <!-- Agrega los demás campos del formulario aquí -->
 
                                                 <div class="modal-footer">

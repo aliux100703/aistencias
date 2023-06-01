@@ -17,7 +17,7 @@
             break;
 
             case 2:
-            header('location: colab.php');
+            header('location: ../users/index.php');
             break;
 
             default:
@@ -45,7 +45,7 @@
                 break;
 
                 case 2:
-                header('location: colab.php');
+                header('location: ../users/index.php');
                 break;
 
                 default:
