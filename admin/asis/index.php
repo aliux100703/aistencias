@@ -64,6 +64,9 @@ if (!isset($_SESSION['rol'])) {
                     <a href="../usuar/index.php">
                         <center><span>Usuarios</span></center>
                     </a>
+                    <a href="../subida_de_archivos/index.php">
+                        <center><span>Archivos</span></center>
+                    </a>
                 </nav>
             </div>
             <main class="main col">
@@ -76,6 +79,7 @@ if (!isset($_SESSION['rol'])) {
                         <form action="importar.php" method="post" encriype="multipart/form-data">
                             <input name="archivo" type="file" required>
                             <input class="btn btn-primary" type="submit" value="importar">
+                                
 
                         </form>
                         <h2>Listar registros:</h2>

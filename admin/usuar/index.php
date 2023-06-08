@@ -1,3 +1,17 @@
+<?php
+
+session_start();
+
+if (!isset($_SESSION['rol'])) {
+    header('location: ../../login/login.php');
+} else {
+    if ($_SESSION['rol'] != 1) {
+        header('location: .././login/login.php');
+    }
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,8 +40,7 @@
                         <a href="#" class="px-3 text-light perfil dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-circle user"></i></a>
 
                         <div class="dropdown-menu" aria-labelledby="navbar-dropdown">
-                            <a class="dropdown-item menuperfil cerrar" href="#"><i class="fas fa-sign-out-alt m-1"></i>Salir
-                            </a>
+                            <a href="../../login/login.php?cerrar_sesion=1" class="bot1">Cerrar sesión</a> </a>
                         </div>
                     </li>
                 </ul>
@@ -39,7 +52,7 @@
         <div class="row">
             <div class="barra-lateral col-12 col-sm-auto">
                 <nav class="menu d-flex d-sm-block justify-content-center flex-wrap">
-                <a href="../asis/index.php">
+                    <a href="../asis/index.php">
                         <center><span>Asistencias</span></center>
                     </a>
                     <a href="../user/index.php">
@@ -47,6 +60,9 @@
                     </a>
                     <a href="../usuar/index.php">
                         <center><span>Usuarios</span></center>
+                    </a>
+                    <a href="../subida_de_archivos/index.php">
+                        <center><span>Archivos</span></center>
                     </a>
                 </nav>
             </div>
